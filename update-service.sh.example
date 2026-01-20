@@ -1,0 +1,15 @@
+#!/bin/bash
+# Update these with your AWS details
+AWS_REGION="us-west-1"
+CLUSTER_NAME="SpringBootCluster"
+SERVICE_NAME="spring-boot-service"
+
+echo "Forcing new deployment for ECS service..."
+aws ecs update-service \
+    --cluster ${CLUSTER_NAME} \
+    --service ${SERVICE_NAME} \
+    --force-new-deployment \
+    --region ${AWS_REGION}
+
+echo "Done! New deployment initiated."
+echo "Check status: aws ecs describe-services --cluster ${CLUSTER_NAME} --services ${SERVICE_NAME} --region ${AWS_REGION}"
